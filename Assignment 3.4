@@ -1,0 +1,18 @@
+HDFS
+1)Provides storage
+2)Provides processing capability
+It is a java-based file system and is the place where all the data in the Hadoop cluster resides.In typical terms, It is called as Master-Slave
+architecture because there is a Master which takes control of all the Slaves. Here the Master is named as Namenodes and the Slaves are named as
+Datanodes. The NameNode is the centerpiece of an HDFS file system. It keeps the directory tree of all files in the file system, and tracks where
+across the cluster the file data is kept. It does not store the data of these files itself.
+Client applications talk to the NameNode whenever they wish to locate a file, or when they want to add/copy/move/delete a file. The NameNode responds
+the successful requests by returning a list of relevant DataNode servers where the data lives.
+The NameNode is a Single Point of Failure for the HDFS Cluster. HDFS is not currently a High Availability system. When the NameNode goes down, the file
+system goes offline. There is an optional SecondaryNameNode that can be hosted on a separate machine. It only creates checkpoints of the namespace by
+merging the edits file into the fsimage file and does not provide any real redundancy.
+It is essential to look after the NameNode.
+Following are some recommendations:
+Configure the NameNode to store one set of transaction logs on a separate disk from the image. Configure the NameNode to store another set of 
+transaction logs to a network mounted disk. Monitor the disk space available to the NameNode. If free space is getting low, add more storage. Do not host
+DataNode, JobTracker or TaskTracker services on the same system. Use a good server with lots of RAM. The more RAM you have, the bigger the file system, or
+the smaller the block size.
